@@ -1,23 +1,43 @@
 ﻿@import "tailwindcss";
 
 :root {
-  --color-surface: oklch(8% 0 0);
-  --color-surface-raised: oklch(12% 0 0);
-  --color-surface-overlay: oklch(15% 0 0);
-  --color-border: oklch(25% 0 0);
-  --color-text: oklch(95% 0 0);
-  --color-text-muted: oklch(65% 0 0);
-  --color-accent: oklch(72% 0.19 160);
-  --color-accent-hover: oklch(65% 0.19 160);
-  --color-danger: oklch(65% 0.25 25);
-  --color-warning: oklch(75% 0.18 70);
-  --color-info: oklch(70% 0.15 250);
+  /* Surfaces */
+  --surface-base: oklch(12% 0.012 165);
+  --surface-raised: oklch(16% 0.015 165);
+  --surface-overlay: oklch(20% 0.018 165);
+  --surface-sidebar: oklch(10% 0.014 165);
 
-  --duration-fast: 150ms;
-  --duration-normal: 300ms;
-  --duration-slow: 500ms;
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Accents */
+  --accent-emerald: oklch(75% 0.20 162);
+  --accent-emerald-strong: oklch(68% 0.22 160);
+  --accent-emerald-soft: oklch(75% 0.20 162 / 0.18);
+  --accent-emerald-border: oklch(75% 0.20 162 / 0.40);
+  --accent-gold: oklch(82% 0.16 78);
+  --accent-gold-soft: oklch(82% 0.16 78 / 0.18);
+  --accent-gold-border: oklch(82% 0.16 78 / 0.40);
+
+  /* Text */
+  --text: oklch(98% 0 0);
+  --text-muted: oklch(98% 0 0 / 0.55);
+  --text-faint: oklch(98% 0 0 / 0.30);
+
+  /* Borders */
+  --border-hairline: oklch(98% 0 0 / 0.08);
+  --border-soft: oklch(98% 0 0 / 0.14);
+
+  /* Radii */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.22, 1.2, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-normal: 280ms;
+  --dur-slow: 500ms;
 
   --font-sans: var(--font-inter), var(--font-noto-arabic), system-ui, sans-serif;
 }
@@ -31,11 +51,149 @@
   scrollbar-color: oklch(30% 0 0) transparent;
 }
 
+html, body {
+  background: var(--surface-base);
+  color: var(--text);
+}
+
 body {
   overflow-x: hidden;
 }
 
-/* TikTok-style snap scroll for feed */
+/* ============ Editorial type ============ */
+.text-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.text-display {
+  font-size: clamp(3rem, 2rem + 4vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 0.98;
+}
+
+.text-display-sm {
+  font-size: clamp(2.25rem, 1.5rem + 2vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.text-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.text-title-sm {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* ============ Surfaces ============ */
+.surface-card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--r-lg);
+}
+
+.surface-card:hover {
+  border-color: var(--border-soft);
+}
+
+.glass {
+  background: oklch(15% 0.012 165 / 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ============ Chips & pills ============ */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-hairline);
+  padding: 4px 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: oklch(98% 0 0 / 0.03);
+}
+
+.chip-emerald {
+  border-color: var(--accent-emerald-border);
+  background: var(--accent-emerald-soft);
+  color: var(--accent-emerald);
+}
+
+.chip-gold {
+  border-color: var(--accent-gold-border);
+  background: var(--accent-gold-soft);
+  color: var(--accent-gold);
+}
+
+/* ============ Score weight bars ============ */
+.weight-bar {
+  height: 6px;
+  border-radius: 9999px;
+  background: oklch(98% 0 0 / 0.06);
+  overflow: hidden;
+}
+
+.weight-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: 9999px;
+}
+
+/* ============ Mockup frames ============ */
+.phone-frame {
+  position: relative;
+  border-radius: 44px;
+  border: 10px solid oklch(10% 0 0);
+  background: black;
+  overflow: hidden;
+}
+
+.phone-frame::before {
+  content: "";
+  position: absolute;
+  top: 8px; left: 50%;
+  transform: translateX(-50%);
+  width: 96px; height: 28px;
+  background: black;
+  border-radius: 0 0 18px 18px;
+  z-index: 50;
+}
+
+.browser-frame {
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border-hairline);
+  background: var(--surface-raised);
+  overflow: hidden;
+}
+
+.browser-frame-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-hairline);
+  background: oklch(98% 0 0 / 0.02);
+}
+
+.browser-dot {
+  width: 11px; height: 11px;
+  border-radius: 9999px;
+}
+
+/* ============ Feed snap ============ */
 .feed-container {
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
@@ -47,7 +205,7 @@ body {
   scroll-snap-stop: always;
 }
 
-/* Video recording overlay */
+/* ============ Recording pulse ============ */
 .recording-pulse {
   animation: pulse-recording 2s ease-in-out infinite;
 }
@@ -57,26 +215,16 @@ body {
   50% { opacity: 0.5; }
 }
 
-/* Kanban drag ghost */
-.kanban-dragging {
-  opacity: 0.5;
-  transform: rotate(3deg);
-}
-
-/* Glass morphism for overlays */
-.glass {
-  background: oklch(15% 0 0 / 80%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-/* Score ring animation */
-@keyframes score-fill {
-  from { stroke-dashoffset: 100; }
-}
-
-/* Fix select dropdown options in dark mode */
+/* ============ Select dropdown dark fix ============ */
 select option {
-  background-color: #18181b;
-  color: #fff;
+  background-color: oklch(16% 0.015 165);
+  color: white;
+}
+
+/* ============ Reduced motion ============ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

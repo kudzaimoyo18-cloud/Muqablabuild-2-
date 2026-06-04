@@ -5,7 +5,6 @@ import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Button } from '@/components/shared/ui/Button'
 import { OAuthButtons } from '@/components/shared/ui/OAuthButtons'
 
 export default function LoginPage() {
@@ -20,108 +19,124 @@ export default function LoginPage() {
     e.preventDefault()
     setError(null)
     setLoading(true)
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
-
+    const { error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) {
       setError(error.message)
       setLoading(false)
       return
     }
-
     const { data: profile } = await supabase
       .from('profiles')
       .select('role')
       .single()
-
-    if (profile?.role === 'employer') {
-      router.push('/dashboard')
-    } else {
-      router.push('/feed')
-    }
+    if (profile?.role === 'employer') router.push('/dashboard')
+    else router.push('/feed')
   }
 
   return (
-    <div className="min-h-dvh flex items-center justify-center bg-zinc-950 px-4">
-      <motion.div
+    <div className="min-h-dvh grid lg:grid-cols-2">
+      {/* Left: hero pitch */}
+      <motion.aside
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full max-w-sm"
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="hidden lg:flex flex-col justify-between p-12 border-r border-[--border-hairline]"
       >
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold tracking-tight">
-            <span className="text-emerald-400">M</span>uqabla
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-emerald-500/20 grid place-items-center">
+            <div className="w-3 h-3 rounded-sm bg-emerald-400" />
+          </div>
+          <span className="text-lg font-bold tracking-tight">Muqabla</span>
+        </div>
+
+        <div className="space-y-6">
+          <div className="chip chip-emerald">
+            Video-first hiring · GCC
+          </div>
+          <h1 className="text-display">
+            Hire for who they are,
+            <br />
+            <span className="text-emerald-400 italic">not what they typed.</span>
           </h1>
-          <p className="text-white/50 text-sm mt-2">
-            Video-first hiring for the Gulf
+          <p className="text-[15px] leading-relaxed text-[--text-muted] max-w-md">
+            Short video pitches replace the resume. AI ranks candidates on skill,
+            confidence and communication — across Arabic and English.
           </p>
         </div>
 
-        {/* OAuth buttons */}
-        <OAuthButtons mode="login" />
+        <p className="text-xs text-[--text-faint]">
+          Trusted across UAE · KSA · Qatar · Kuwait · Bahrain · Oman
+        </p>
+      </motion.aside>
 
-        {/* Divider */}
-        <div className="flex items-center gap-3 my-6">
-          <div className="flex-1 h-px bg-white/10" />
-          <span className="text-xs text-white/30 uppercase tracking-wider">or</span>
-          <div className="flex-1 h-px bg-white/10" />
-        </div>
+      {/* Right: auth */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        className="flex items-center justify-center p-6 lg:p-12"
+      >
+        <div className="w-full max-w-sm">
+          {/* Mobile-only logo */}
+          <div className="lg:hidden flex items-center justify-center gap-2 mb-8">
+            <div className="w-7 h-7 rounded-lg bg-emerald-500/20 grid place-items-center">
+              <div className="w-2.5 h-2.5 rounded-sm bg-emerald-400" />
+            </div>
+            <span className="text-base font-bold">Muqabla</span>
+          </div>
 
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div>
-            <label htmlFor="email" className="block text-sm text-white/60 mb-1.5">
-              Email
-            </label>
+          <p className="text-eyebrow mb-2">Welcome back</p>
+          <h2 className="text-title mb-6">Log in to Muqabla</h2>
+
+          <OAuthButtons mode="login" />
+
+          <div className="flex items-center gap-3 my-6">
+            <div className="flex-1 h-px bg-[--border-hairline]" />
+            <span className="text-[10px] text-[--text-faint] uppercase tracking-wider">
+              or continue with email
+            </span>
+            <div className="flex-1 h-px bg-[--border-hairline]" />
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-3">
             <input
-              id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/25 transition-all"
               placeholder="you@company.com"
+              className="w-full px-4 py-3 rounded-xl border border-[--border-hairline] bg-[--surface-raised] text-[15px] placeholder-[--text-faint] focus:outline-none focus:border-[--accent-emerald-border] focus:ring-2 focus:ring-[--accent-emerald-soft] transition"
             />
-          </div>
-
-          <div>
-            <label htmlFor="password" className="block text-sm text-white/60 mb-1.5">
-              Password
-            </label>
             <input
-              id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/25 transition-all"
-              placeholder="Enter password"
+              placeholder="Password"
+              className="w-full px-4 py-3 rounded-xl border border-[--border-hairline] bg-[--surface-raised] text-[15px] placeholder-[--text-faint] focus:outline-none focus:border-[--accent-emerald-border] focus:ring-2 focus:ring-[--accent-emerald-soft] transition"
             />
-          </div>
-
-          {error && (
-            <motion.p
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-red-400 text-sm bg-red-500/10 px-3 py-2 rounded-lg"
+            {error && (
+              <motion.p
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-red-400 text-sm bg-red-500/10 px-3 py-2 rounded-lg"
+              >
+                {error}
+              </motion.p>
+            )}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 rounded-xl bg-emerald-500 text-zinc-950 font-semibold text-[15px] shadow-[0_10px_28px_-12px_rgba(52,211,153,0.6)] hover:bg-emerald-400 active:bg-emerald-600 transition disabled:opacity-60"
             >
-              {error}
-            </motion.p>
-          )}
+              {loading ? 'Signing in…' : 'Log In'}
+            </button>
+          </form>
 
-          <Button type="submit" loading={loading} className="w-full" size="lg">
-            Log In
-          </Button>
-        </form>
-
-        <div className="mt-6 text-center">
-          <p className="text-sm text-white/40">
-            No account?{' '}
-            <Link href="/register" className="text-emerald-400 hover:text-emerald-300 font-medium">
-              Create one
+          <p className="text-sm text-[--text-faint] mt-6 text-center">
+            New here?{' '}
+            <Link href="/register" className="text-emerald-400 font-medium">
+              Create an account
             </Link>
           </p>
         </div>
