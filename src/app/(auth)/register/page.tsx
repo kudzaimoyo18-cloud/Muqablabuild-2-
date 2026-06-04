@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/shared/ui/Button'
+import { OAuthButtons } from '@/components/shared/ui/OAuthButtons'
 import type { UserRole } from '@/lib/types/domain'
 
 export default function RegisterPage() {
@@ -35,7 +36,6 @@ export default function RegisterPage() {
     }
 
     if (data.user) {
-      // Create profile
       const { error: profileError } = await supabase.from('profiles').insert({
         id: data.user.id,
         role,
@@ -48,7 +48,6 @@ export default function RegisterPage() {
         return
       }
 
-      // Route to onboarding
       router.push(`/onboarding/${role}`)
     }
   }
@@ -66,6 +65,16 @@ export default function RegisterPage() {
             <span className="text-emerald-400">M</span>uqabla
           </h1>
           <p className="text-white/50 text-sm mt-2">Create your account</p>
+        </div>
+
+        {/* OAuth buttons */}
+        <OAuthButtons mode="register" />
+
+        {/* Divider */}
+        <div className="flex items-center gap-3 my-6">
+          <div className="flex-1 h-px bg-white/10" />
+          <span className="text-xs text-white/30 uppercase tracking-wider">or</span>
+          <div className="flex-1 h-px bg-white/10" />
         </div>
 
         <form onSubmit={handleRegister} className="space-y-4">

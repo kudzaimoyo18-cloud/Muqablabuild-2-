@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/shared/ui/Button'
+import { OAuthButtons } from '@/components/shared/ui/OAuthButtons'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -31,7 +32,6 @@ export default function LoginPage() {
       return
     }
 
-    // Check profile to route correctly
     const { data: profile } = await supabase
       .from('profiles')
       .select('role')
@@ -59,6 +59,16 @@ export default function LoginPage() {
           <p className="text-white/50 text-sm mt-2">
             Video-first hiring for the Gulf
           </p>
+        </div>
+
+        {/* OAuth buttons */}
+        <OAuthButtons mode="login" />
+
+        {/* Divider */}
+        <div className="flex items-center gap-3 my-6">
+          <div className="flex-1 h-px bg-white/10" />
+          <span className="text-xs text-white/30 uppercase tracking-wider">or</span>
+          <div className="flex-1 h-px bg-white/10" />
         </div>
 
         <form onSubmit={handleLogin} className="space-y-4">
