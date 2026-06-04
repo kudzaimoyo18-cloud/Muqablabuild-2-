@@ -74,3 +74,9 @@ body {
 @keyframes score-fill {
   from { stroke-dashoffset: 100; }
 }
+
+/* Fix select dropdown options in dark mode */
+select option {
+  background-color: #18181b;
+  color: #fff;
+}

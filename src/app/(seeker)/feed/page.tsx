@@ -21,7 +21,7 @@ export default function FeedPage() {
       if (cursor) params.set('cursor', cursor)
       const res = await fetch(`/api/jobs?${params}`)
       const data = await res.json()
-      appendJobs(data.jobs, data.nextCursor)
+      appendJobs(data.jobs || [], data.nextCursor || null)
     } finally {
       setLoading(false)
     }

@@ -41,7 +41,10 @@ export default function ApplicationsPage() {
         .eq('profile_id', user.id)
         .single()
 
-      if (!seeker) return
+      if (!seeker) {
+        setLoading(false)
+        return
+      }
 
       const { data } = await supabase
         .from('applications')
