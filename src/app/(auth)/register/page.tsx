@@ -24,9 +24,16 @@ export default function RegisterPage() {
     setError(null)
     setLoading(true)
 
+    // Pass role and display_name via metadata — DB trigger creates profile
     const { data, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          role,
+          display_name: displayName,
+        },
+      },
     })
 
     if (signUpError) {
@@ -36,19 +43,13 @@ export default function RegisterPage() {
     }
 
     if (data.user) {
-      const { error: profileError } = await supabase.from('profiles').insert({
-        id: data.user.id,
-        role,
-        display_name: displayName,
-      })
-
-      if (profileError) {
-        setError(profileError.message)
-        setLoading(false)
-        return
+      // Profile created by DB trigger via metadata
+      // Route to onboarding
+      if (role === 'employer') {
+        router.push('/onboarding/employer')
+      } else {
+        router.push('/onboarding/seeker')
       }
-
-      router.push(`/onboarding/${role}`)
     }
   }
 

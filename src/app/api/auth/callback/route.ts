@@ -11,39 +11,44 @@ export async function GET(request: Request) {
     const { data, error } = await supabase.auth.exchangeCodeForSession(code)
 
     if (!error && data.user) {
-      // Check if profile exists (new OAuth user won't have one)
-      const { data: existingProfile } = await supabase
+      // Profile auto-created by DB trigger on auth.users insert
+      // Check if profile exists and get role
+      const { data: profile } = await supabase
         .from('profiles')
         .select('id, role')
         .eq('id', data.user.id)
         .single()
 
-      if (!existingProfile) {
-        // First-time OAuth user — create profile from provider metadata
-        const meta = data.user.user_metadata
-        const displayName =
-          meta?.full_name ||
-          meta?.name ||
-          `${meta?.given_name || ''} ${meta?.family_name || ''}`.trim() ||
-          data.user.email?.split('@')[0] ||
-          'User'
-
-        await supabase.from('profiles').insert({
-          id: data.user.id,
-          role: 'seeker', // Default to seeker; can switch in onboarding
-          display_name: displayName,
-          avatar_cf_uid: meta?.avatar_url || meta?.picture || null,
-        })
-
-        // Redirect to onboarding for new OAuth users
+      if (!profile) {
+        // First OAuth login — trigger should have created profile
+        // Redirect to seeker onboarding (default role)
         return NextResponse.redirect(`${origin}/onboarding/seeker`)
       }
 
-      // Existing user — route by role
-      if (existingProfile.role === 'employer') {
+      // Check if seeker_profile or employer_profile exists (onboarding done?)
+      if (profile.role === 'employer') {
+        const { data: employer } = await supabase
+          .from('employer_profiles')
+          .select('id')
+          .eq('profile_id', data.user.id)
+          .single()
+
+        if (!employer) {
+          return NextResponse.redirect(`${origin}/onboarding/employer`)
+        }
         return NextResponse.redirect(`${origin}/dashboard`)
+      } else {
+        const { data: seeker } = await supabase
+          .from('seeker_profiles')
+          .select('id')
+          .eq('profile_id', data.user.id)
+          .single()
+
+        if (!seeker) {
+          return NextResponse.redirect(`${origin}/onboarding/seeker`)
+        }
+        return NextResponse.redirect(`${origin}${next}`)
       }
-      return NextResponse.redirect(`${origin}${next}`)
     }
   }
 
