@@ -1,0 +1,106 @@
+﻿{
+  "common": {
+    "appName": "Muqabla",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "search": "Search",
+    "filter": "Filter",
+    "noResults": "No results found"
+  },
+  "auth": {
+    "login": "Log In",
+    "register": "Create Account",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "asSeeker": "I'm looking for a job",
+    "asEmployer": "I'm hiring"
+  },
+  "seeker": {
+    "feed": {
+      "title": "Discover Jobs",
+      "apply": "Apply Now",
+      "save": "Save",
+      "matchScore": "{{score}}% Match",
+      "swipeHint": "Swipe up for next job"
+    },
+    "profile": {
+      "title": "My Profile",
+      "portfolio": "Video Portfolio",
+      "skills": "Skills",
+      "addVideo": "Add Video",
+      "openToWork": "Open to Work",
+      "editProfile": "Edit Profile"
+    },
+    "record": {
+      "title": "Record Video",
+      "startRecording": "Start Recording",
+      "stopRecording": "Stop",
+      "retake": "Retake",
+      "useThis": "Use This Video",
+      "coaching": {
+        "lighting": "Adjust lighting",
+        "pace": "Slow down",
+        "filler": "Watch filler words",
+        "eyeContact": "Look at the camera"
+      }
+    },
+    "apply": {
+      "title": "Apply to {{jobTitle}}",
+      "selectVideos": "Select videos to attach",
+      "recordNew": "Record a new video",
+      "addNote": "Add a note (optional)",
+      "submitApplication": "Submit Application",
+      "applied": "Application Submitted!"
+    }
+  },
+  "employer": {
+    "dashboard": {
+      "title": "Dashboard",
+      "openRoles": "Open Roles",
+      "totalApplications": "Total Applications",
+      "pendingReview": "Pending Review",
+      "avgTimeToHire": "Avg. Time to Hire"
+    },
+    "jobs": {
+      "title": "Job Postings",
+      "newJob": "Post New Job",
+      "editJob": "Edit Job",
+      "candidates": "Candidates",
+      "analytics": "Analytics",
+      "anonymousMode": "Anonymous Mode",
+      "anonymousHint": "Hide candidate identity to reduce bias"
+    },
+    "candidates": {
+      "title": "Candidates",
+      "aiScore": "AI Score",
+      "matchScore": "Match",
+      "rate": "Rate",
+      "shortlist": "Shortlist",
+      "reject": "Reject",
+      "moveToInterview": "Move to Interview"
+    },
+    "pipeline": {
+      "title": "Hiring Pipeline",
+      "applied": "Applied",
+      "reviewed": "Reviewed",
+      "shortlisted": "Shortlisted",
+      "interview": "Interview",
+      "offer": "Offer",
+      "rejected": "Rejected"
+    }
+  },
+  "video": {
+    "processing": "Processing video...",
+    "ready": "Video ready",
+    "failed": "Video processing failed"
+  }
+}

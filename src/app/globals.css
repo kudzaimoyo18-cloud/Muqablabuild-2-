@@ -1,0 +1,76 @@
+﻿@import "tailwindcss";
+
+:root {
+  --color-surface: oklch(8% 0 0);
+  --color-surface-raised: oklch(12% 0 0);
+  --color-surface-overlay: oklch(15% 0 0);
+  --color-border: oklch(25% 0 0);
+  --color-text: oklch(95% 0 0);
+  --color-text-muted: oklch(65% 0 0);
+  --color-accent: oklch(72% 0.19 160);
+  --color-accent-hover: oklch(65% 0.19 160);
+  --color-danger: oklch(65% 0.25 25);
+  --color-warning: oklch(75% 0.18 70);
+  --color-info: oklch(70% 0.15 250);
+
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.22, 1.2, 0.36, 1);
+
+  --font-sans: var(--font-inter), var(--font-noto-arabic), system-ui, sans-serif;
+}
+
+[dir="rtl"] {
+  --font-sans: var(--font-noto-arabic), var(--font-inter), system-ui, sans-serif;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(30% 0 0) transparent;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* TikTok-style snap scroll for feed */
+.feed-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.feed-item {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Video recording overlay */
+.recording-pulse {
+  animation: pulse-recording 2s ease-in-out infinite;
+}
+
+@keyframes pulse-recording {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Kanban drag ghost */
+.kanban-dragging {
+  opacity: 0.5;
+  transform: rotate(3deg);
+}
+
+/* Glass morphism for overlays */
+.glass {
+  background: oklch(15% 0 0 / 80%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Score ring animation */
+@keyframes score-fill {
+  from { stroke-dashoffset: 100; }
+}

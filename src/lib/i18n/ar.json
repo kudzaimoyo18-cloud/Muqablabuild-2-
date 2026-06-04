@@ -1,0 +1,106 @@
+﻿{
+  "common": {
+    "appName": "مقابلة",
+    "loading": "جاري التحميل...",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "back": "رجوع",
+    "next": "التالي",
+    "submit": "إرسال",
+    "search": "بحث",
+    "filter": "تصفية",
+    "noResults": "لا توجد نتائج"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "noAccount": "ليس لديك حساب؟",
+    "hasAccount": "لديك حساب بالفعل؟",
+    "asSeeker": "أبحث عن وظيفة",
+    "asEmployer": "أبحث عن موظفين"
+  },
+  "seeker": {
+    "feed": {
+      "title": "اكتشف الوظائف",
+      "apply": "قدّم الآن",
+      "save": "حفظ",
+      "matchScore": "{{score}}% توافق",
+      "swipeHint": "اسحب للأعلى للوظيفة التالية"
+    },
+    "profile": {
+      "title": "ملفي الشخصي",
+      "portfolio": "معرض الفيديو",
+      "skills": "المهارات",
+      "addVideo": "إضافة فيديو",
+      "openToWork": "متاح للعمل",
+      "editProfile": "تعديل الملف"
+    },
+    "record": {
+      "title": "تسجيل فيديو",
+      "startRecording": "بدء التسجيل",
+      "stopRecording": "إيقاف",
+      "retake": "إعادة التسجيل",
+      "useThis": "استخدم هذا الفيديو",
+      "coaching": {
+        "lighting": "عدّل الإضاءة",
+        "pace": "تحدث ببطء",
+        "filler": "انتبه للكلمات الزائدة",
+        "eyeContact": "انظر إلى الكاميرا"
+      }
+    },
+    "apply": {
+      "title": "التقديم لـ {{jobTitle}}",
+      "selectVideos": "اختر فيديوهات للإرفاق",
+      "recordNew": "سجّل فيديو جديد",
+      "addNote": "أضف ملاحظة (اختياري)",
+      "submitApplication": "إرسال الطلب",
+      "applied": "تم إرسال الطلب!"
+    }
+  },
+  "employer": {
+    "dashboard": {
+      "title": "لوحة التحكم",
+      "openRoles": "الوظائف المفتوحة",
+      "totalApplications": "إجمالي الطلبات",
+      "pendingReview": "بانتظار المراجعة",
+      "avgTimeToHire": "متوسط وقت التوظيف"
+    },
+    "jobs": {
+      "title": "الوظائف المنشورة",
+      "newJob": "نشر وظيفة جديدة",
+      "editJob": "تعديل الوظيفة",
+      "candidates": "المرشحون",
+      "analytics": "التحليلات",
+      "anonymousMode": "الوضع المجهول",
+      "anonymousHint": "إخفاء هوية المرشح لتقليل التحيز"
+    },
+    "candidates": {
+      "title": "المرشحون",
+      "aiScore": "تقييم الذكاء الاصطناعي",
+      "matchScore": "التوافق",
+      "rate": "تقييم",
+      "shortlist": "قائمة مختصرة",
+      "reject": "رفض",
+      "moveToInterview": "نقل للمقابلة"
+    },
+    "pipeline": {
+      "title": "مسار التوظيف",
+      "applied": "تقدّم",
+      "reviewed": "تمت المراجعة",
+      "shortlisted": "القائمة المختصرة",
+      "interview": "المقابلة",
+      "offer": "العرض",
+      "rejected": "مرفوض"
+    }
+  },
+  "video": {
+    "processing": "جاري معالجة الفيديو...",
+    "ready": "الفيديو جاهز",
+    "failed": "فشلت معالجة الفيديو"
+  }
+}
